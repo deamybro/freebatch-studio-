@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-head"><h1>New Video Batch</h1></div>
+
+<div class="banner banner-info" style="display:flex;align-items:center;gap:10px;">
+  <span style="font-size:18px;">💡</span>
+  <span><strong>Tip:</strong> you can now <strong>upload an image directly</strong> — we’ll host it and fill the URL for you. Or paste any public <code>https://</code> image link.</span>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h2>1. Prompts</h2>
+    <p class="muted">Paste one prompt per line, or upload a TXT / CSV file.</p>
+    <div class="input-row">
+      <button id="btnUploadTxt" class="btn">Upload TXT</button>
+      <button id="btnUploadCsv" class="btn">Upload CSV</button>
+      <input type="file" id="fileInput" accept=".txt,.csv" hidden>
+    </div>
+    <textarea id="prompts" rows="8" placeholder="a cat walking on a beach at sunset&#10;..."></textarea>
+  </div>
+
+  <div class="card">
+    <h2>2. Video Settings</h2>
+    <label>Job type</label>
+    <select id="jobType">
+      <option value="text_to_video">Text-to-video</option>
+      <option value="image_to_video">Image-to-video</option>
+      <option value="keyframes">Keyframes</option>
+    </select>
+    <div id="imageUrlField" style="display:none">
+      <label>Image for image-to-video</label>
+      <div id="dropZone" class="drop-zone">
+        <div class="drop-zone-inner">
+          <span class="drop-icon">📁</span>
+          <span><strong>Drop image here</strong> or click to browse</span>
+          <span class="muted" style="font-size:12px;">JPG, PNG, WebP, GIF — max 10MB. We’ll host it and fill the URL below.</span>
+        </div>
+        <input type="file" id="imageFile" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,.jpg,.jpeg,.png,.webp,.gif,.bmp" hidden>
+      </div>
+      <div id="imagePreview" style="display:none; margin:8px 0;">
+        <img id="previewImg" style="max-width:100%; max-height:180px; border-radius:10px; border:1px solid var(--border);" />
+        <div class="row-gap" style="margin-top:6px;">
+          <span id="uploadStatus" class="muted"></span>
+          <button id="btnRemoveImage" class="btn btn-small" style="display:none;">Remove</button>
+        </div>
+      </div>
+      <label style="margin-top:10px;">Image URL (auto-filled after upload)</label>
+      <div class="input-row" style="align-items:center;">
+        <input id="imageUrl" placeholder="https://...  — or upload above" style="flex:1;">
+        <button id="btnCheckUrl" class="btn btn-small">Validate</button>
+      </div>
+      <span id="urlStatus" class="muted"></span>
+    </div>
+    <div id="keyframeField" style="display:none">
+      <label>Keyframes</label>
+      <div id="kfDropZone" class="drop-zone" style="padding:14px;">
+        <div class="drop-zone-inner">
+          <span class="drop-icon">🖼️</span>
+          <span><strong>Drop 2+ images here</strong> or click to browse</span>
+          <span class="muted" style="font-size:12px;">We’ll host each and fill the URLs below.</span>
+        </div>
+        <input type="file" id="kfFiles" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,.jpg,.jpeg,.png,.webp,.gif,.bmp" multiple hidden>
+      </div>
+      <div id="kfPreview" class="kf-grid" style="display:none; margin:8px 0;"></div>
+      <span id="kfStatus" class="muted"></span>
+      <label style="margin-top:10px;">Keyframe URLs (one per line)</label>
+      <textarea id="keyframes" rows="3" placeholder="https://.../frame1.png&#10;https://.../frame2.png"></textarea>
+    </div>
+    <label>Duration</label>
+    <select id="duration">
+      <option value="3s">~3s (81 frames @24fps)</option>
+      <option value="5s" selected>~5s (121 frames @24fps)</option>
+      <option value="10s">~10s (241 frames @24fps)</option>
+      <option value="18s">~18s (441 frames @24fps)</option>
+    </select>
+    <label>FPS</label>
+    <select id="fps"><option>24</option><option>30</option><option>16</option><option>8</option></select>
+    <label>Resolution target</label>
+    <select id="tier"><option value="480p">480p</option><option value="720p" selected>720p</option><option value="1080p">1080p</option></select>
+    <label>Ratio</label>
+    <select id="ratio"><option>16:9</option><option>9:16</option><option>1:1</option><option>4:3</option><option>3:4</option></select>
+    <label>Seed (optional)</label>
+    <input id="seed" type="number" placeholder="e.g. 12345">
+    <label>Negative prompt (optional)</label>
+    <input id="negativePrompt">
+    <label>Max retries</label>
+    <input id="maxAttempts" type="number" value="3" min="0" max="10">
+    <label>Batch name</label>
+    <input id="batchName" value="Video batch">
+    <button id="btnCreate" class="btn btn-primary">Create Batch</button>
+  </div>
+</div>
+
+<div class="card">
+  <h2>3. Preview <span id="previewCount" class="muted"></span></h2>
+  <div id="parseErrors" class="alert alert-danger" style="display:none"></div>
+  <div id="previewWrap"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/new_video_batch.js"></script>
+{% endblock %}

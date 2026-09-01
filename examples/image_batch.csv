@@ -1,0 +1,7 @@
+prompt,type,provider,size,ratio,negative_prompt,seed
+"A photorealistic red apple on a white studio table, soft shadows","text_to_image","agnes_image","1K","1:1","blurry, low quality",42
+"A futuristic city skyline at dusk, neon lights, cinematic","text_to_image","agnes_image","2K","16:9","watermark, text",12345
+"A cozy cabin in a snowy forest, warm window light","text_to_image","agnes_image","1K","4:3","",7
+"A portrait of a woman with flowers, studio lighting","text_to_image","agnes_image","1K","3:4","",0
+"Transform this product photo into a rain-soaked cyberpunk scene","image_to_image","agnes_image","1K","1:1","",2024
+"An astronaut walking on Mars, dramatic lighting","text_to_image","ai_horde","1K","16:9","",555

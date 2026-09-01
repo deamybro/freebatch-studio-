@@ -1,0 +1,6 @@
+prompt,type,provider,duration,fps,width,height,negative_prompt,seed
+"A cinematic shot of a cat walking on a beach at sunset, gentle waves","text_to_video","agnes_video","5s",24,1152,768,"",42
+"A drone shot flying over a misty mountain range","text_to_video","agnes_video","3s",24,832,448,"",1337
+"A person turning and smiling at the camera, soft light","image_to_video","agnes_video","3s",24,832,448,"",7
+"Generate a smooth cinematic transition between the keyframes","keyframes","agnes_video","5s",24,1152,768,"",0
+"A futuristic car driving through neon streets at night","text_to_video","agnes_video","10s",30,1152,768,"",99

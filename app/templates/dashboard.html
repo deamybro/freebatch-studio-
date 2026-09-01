@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-head">
+  <h1>Dashboard</h1>
+  <span id="lastRefresh" class="muted"></span>
+</div>
+
+<div class="stat-grid" id="statGrid"></div>
+
+<div class="two-col">
+  <div class="card">
+    <h2>Queue Snapshot</h2>
+    <div id="queueSnapshot" class="kv"></div>
+  </div>
+  <div class="card">
+    <h2>Providers</h2>
+    <div id="providerStatus" class="kv"></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Recent Batches</h2>
+  <div id="recentBatches" class="list"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

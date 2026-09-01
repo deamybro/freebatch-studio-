@@ -1,0 +1,1 @@
+"""FreeBatch Studio package."""

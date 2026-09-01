@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-head">
+  <h1>Batch #{{ batch.id }} · {{ batch.name }}</h1>
+  <div class="row-gap">
+    <button id="btnPause" class="btn">Pause</button>
+    <button id="btnResume" class="btn">Resume</button>
+    <button id="btnCancel" class="btn btn-danger">Cancel</button>
+    <button id="btnRetryFailed" class="btn">Retry Failed</button>
+    <button id="btnDuplicate" class="btn">Duplicate</button>
+    <a id="btnManifest" class="btn" href="/api/batches/{{ batch.id }}/manifest" download>Manifest (JSON)</a>
+    <a id="btnManifestCsv" class="btn" href="/api/batches/{{ batch.id }}/manifest.csv" download>Manifest (CSV)</a>
+    <a id="btnZip" class="btn btn-primary" href="/api/batches/{{ batch.id }}/zip">Download ZIP</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="stat-row">
+    <div class="stat"><span id="stTotal">0</span><label>Total</label></div>
+    <div class="stat"><span id="stDone">0</span><label>Completed</label></div>
+    <div class="stat"><span id="stFailed">0</span><label>Failed</label></div>
+    <div class="stat"><span id="stPending">0</span><label>Pending</label></div>
+    <div class="stat"><span id="stActive">0</span><label>Active</label></div>
+  </div>
+  <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+  <div id="batchMeta" class="muted"></div>
+</div>
+
+<div class="card">
+  <div class="job-filter">
+    <button class="chip active" data-status="">All</button>
+    <button class="chip" data-status="pending">Pending</button>
+    <button class="chip" data-status="queued_remote">Queued</button>
+    <button class="chip" data-status="processing">Processing</button>
+    <button class="chip" data-status="polling">Polling</button>
+    <button class="chip" data-status="completed">Completed</button>
+    <button class="chip" data-status="failed">Failed</button>
+    <button class="chip" data-status="cancelled">Cancelled</button>
+  </div>
+  <div id="jobsList" class="jobs"></div>
+  <div class="row-gap">
+    <button id="btnPrev" class="btn btn-small">← Prev</button>
+    <span id="pageInfo" class="muted"></span>
+    <button id="btnNext" class="btn btn-small">Next →</button>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>window.BATCH_ID = {{ batch.id }};</script>
+<script src="/static/js/batch_detail.js"></script>
+{% endblock %}

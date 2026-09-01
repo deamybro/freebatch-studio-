@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-head"><h1>New Image Batch</h1></div>
+
+<div class="two-col">
+  <div class="card">
+    <h2>1. Prompts</h2>
+    <p class="muted">Paste one prompt per line, or upload a TXT / CSV file.
+      <a href="/api/examples/image.csv" download>Download example CSV</a> ·
+      <a href="/api/examples/video.csv" download>Video CSV example</a></p>
+    <div class="input-row">
+      <button id="btnUploadTxt" class="btn">Upload TXT</button>
+      <button id="btnUploadCsv" class="btn">Upload CSV</button>
+      <input type="file" id="fileInput" accept=".txt,.csv" hidden>
+    </div>
+    <textarea id="prompts" rows="8" placeholder="a red apple on a table&#10;a cat in a garden&#10;..."></textarea>
+  </div>
+
+  <div class="card">
+    <h2>2. Image Settings</h2>
+    <label>Provider</label>
+    <select id="provider">
+      <option value="agnes_image">Agnes Image</option>
+      <option value="ai_horde">AI Horde</option>
+    </select>
+    <label>Model</label>
+    <input id="model" value="agnes-image-2.1-flash">
+    <label>Resolution</label>
+    <select id="size">
+      <option value="1K">1K</option>
+      <option value="2K">2K</option>
+      <option value="3K">3K</option>
+      <option value="4K">4K</option>
+    </select>
+    <label>Ratio</label>
+    <select id="ratio">
+      <option>1:1</option><option>3:4</option><option>4:3</option>
+      <option>16:9</option><option>9:16</option><option>2:3</option>
+      <option>3:2</option><option>21:9</option>
+    </select>
+    <label>Output format</label>
+    <select id="outputFormat">
+      <option value="url">URL</option>
+      <option value="b64_json">Base64</option>
+    </select>
+    <label>Fallback provider (technical failures only)</label>
+    <select id="fallback">
+      <option value="">None</option>
+      <option value="ai_horde" selected>AI Horde</option>
+      <option value="agnes_image">Agnes Image</option>
+    </select>
+    <label>Max retries</label>
+    <input id="maxAttempts" type="number" value="3" min="0" max="10">
+    <label>Batch name</label>
+    <input id="batchName" value="Image batch">
+    <button id="btnCreate" class="btn btn-primary">Create Batch</button>
+  </div>
+</div>
+
+<div class="card">
+  <h2>3. Preview <span id="previewCount" class="muted"></span></h2>
+  <div id="parseErrors" class="alert alert-danger" style="display:none"></div>
+  <div id="previewWrap"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/new_image_batch.js"></script>
+{% endblock %}

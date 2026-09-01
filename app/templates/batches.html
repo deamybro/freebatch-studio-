@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-head"><h1>Batches</h1></div>
+<div class="card">
+  <div id="batchesList" class="list"></div>
+  <div id="batchesEmpty" class="muted" style="display:none">No batches yet.</div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/batches.js"></script>
+{% endblock %}

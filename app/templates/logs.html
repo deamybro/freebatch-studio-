@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-head">
+  <h1>Logs</h1>
+  <div class="row-gap">
+    <button id="btnRefresh" class="btn">Refresh</button>
+    <label class="inline"><input type="checkbox" id="autoRefresh" checked> auto-refresh (5s)</label>
+  </div>
+</div>
+<pre id="logOutput" class="log-view"></pre>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/logs.js"></script>
+{% endblock %}

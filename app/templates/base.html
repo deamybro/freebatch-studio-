@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-logo">⚡</span>
+        <span class="brand-name">FreeBatch Studio</span>
+      </div>
+      <nav>
+        <a href="/" data-nav="dashboard">Dashboard</a>
+        <a href="/batches/new-image" data-nav="image">New Image Batch</a>
+        <a href="/batches/new-video" data-nav="video">New Video Batch</a>
+        <a href="/batches" data-nav="batches">Batches</a>
+        <a href="/providers" data-nav="providers">Providers</a>
+        <a href="/settings" data-nav="settings">Settings</a>
+        <a href="/logs" data-nav="logs">Logs</a>
+      </nav>
+      <div class="sidebar-foot">
+        <div id="freeBadge" class="badge badge-free">FREE-ONLY</div>
+        <div class="version">v{{ version }}</div>
+      </div>
+    </aside>
+    <main class="content">
+      {% if free_only_mode %}
+      <div class="banner banner-info">
+        <strong>FREE-ONLY MODE</strong> — paid models, premium endpoints and paid
+        fallbacks are disabled. Free pricing can change. Verify provider pricing
+        before very large batches.
+      </div>
+      {% endif %}
+      {% if stale_warning %}
+      <div class="banner banner-warn" id="staleBanner">
+        ⚠ {{ stale_warning }}
+      </div>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <script src="/static/js/api.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
