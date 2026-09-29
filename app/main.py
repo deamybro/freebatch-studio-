@@ -73,13 +73,13 @@ app.include_router(page_routes.router)
 app.include_router(api_routes.router)
 
 
-def run() -> None:
+def run(host: str | None = None, port: int | None = None) -> None:
     import uvicorn
 
     uvicorn.run(
         "app.main:app",
-        host=settings.host,
-        port=settings.port,
+        host=host or settings.host,
+        port=port or settings.port,
         log_level=settings.log_level.lower(),
         reload=False,
     )

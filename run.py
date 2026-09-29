@@ -45,7 +45,7 @@ def main() -> None:
         print("FreeBatch Studio starting (FREE-ONLY mode)")
     print(f"  local UI: {url}")
     print("  press Ctrl+C to stop")
-    run()
+    run(host=args.host, port=args.port)
 
 
 if __name__ == "__main__":
